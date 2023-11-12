@@ -26,7 +26,7 @@ public class FileHandler implements FileParseInterface, FileWriteInterface{
 	                String password = userDetails[1].trim();
 	                users.add(new User(username, password));
 	            }
-	        }
+	        } 
 	    } catch (IOException e) {
 	        e.printStackTrace(); 
 	    }

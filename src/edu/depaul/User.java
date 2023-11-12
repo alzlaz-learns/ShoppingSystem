@@ -5,6 +5,7 @@ public class User {
 	private String username;
 	private String password;
 	
+	//add a cart id
 	public User(String userName, String password) {
 		this.setUserName(userName);
 		this.setPassword(password);

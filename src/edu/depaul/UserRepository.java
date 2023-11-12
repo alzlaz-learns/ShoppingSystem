@@ -21,7 +21,7 @@ public class UserRepository implements UserInterface{
 		fileWriter.saveNewUserToFile(filePath, user);
 	}
 
-	//call file writer interface
+	//call file parser interface
 	@Override
 	public User findUserByName(String username) {
 		

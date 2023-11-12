@@ -13,7 +13,14 @@ public class Authentication {
         userRepository.save(user);
 	}
 	
-	public void login(String username, String password) {
-		
+	public boolean login(String username, String password) {
+		User user = userRepository.findUserByName(username);
+		if(user != null && user.getPassword().equals(password)) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 }
+ 

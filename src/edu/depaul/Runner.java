@@ -1,8 +1,14 @@
 package edu.depaul;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
+import edu.depaul.ProductCatalog.CatalogFileParser;
+import edu.depaul.ProductCatalog.CatalogFileWriter;
+import edu.depaul.ProductCatalog.CatalogHandler;
+import edu.depaul.ProductCatalog.Product;
 import edu.depaul.ProductCatalog.ProductCatalog;
 import edu.depaul.User.Authentication;
 import edu.depaul.User.User;
@@ -12,9 +18,63 @@ import edu.depaul.User.UserRepository;
 
 public class Runner {
 
-	public static void sampleGenerator(String catalogFile, ProductCatalog catalog ) {
-		
+	public static void sampleChecker(String catalogFile) {
+		try (BufferedReader br = new BufferedReader(new FileReader(catalogFile))) {
+			if(br.readLine() == null) {
+				System.out.println("generating sample content.");
+				sampleGenerator(catalogFile);
+			}
+        } catch (IOException e) {
+            e.printStackTrace();
+            return; // An IOException occurred, handle accordingly.
+        }
 	}
+	
+	private static void sampleGenerator(String catalogFile) {
+		
+		ProductCatalog pc = new ProductCatalog();
+        CatalogFileParser cfp = new CatalogFileParser();
+        CatalogFileWriter cfw = new CatalogFileWriter();
+        CatalogHandler ch = new CatalogHandler(pc, cfw, cfp);
+	
+		String sample = 
+				"1,Cereal, dummy yummy,4.99\n" +
+			    "2,Bread,Fresh when made,3.49\n" +
+			    "3,Apples,yum only a coupe of worms,5.99\n" +
+			    "4,Cheese,Milk aged for your pleasure,7.99\n" +
+			    "5,Coffee,Good ol cuppa joe,8.99\n" +
+			    "6,Almond Milk,Use it for your coffee,2.99\n" +
+			    "7,Eggs,eggs,3.99\n" +
+			    "8,Spaghetti,great with meathballs,1.99\n" +
+			    "9,Oil,Food or car works great with both,10.99\n" +
+			    "10,Blue,it taste toxic,2.49\n" +
+			    "11,Chocolate,mwa chefs kiss,1.99\n" +
+			    "12,Jam,strawberry,3.99\n" +
+			    "13,Batteries,How shocking,5.49\n" +
+			    "14,stake,the wooden kind for vampires,2.99\n" +
+			    "15,raw garbage,Maybe its good,4.49";
+		
+		 String[] productEntries = sample.split("\n");
+		 for (String entry : productEntries) {
+		        String[] productData = entry.split(",");
+		        if (productData.length == 4) {
+		            try {
+		                int id = Integer.parseInt(productData[0].trim());
+		                String name = productData[1].trim();
+		                String description = productData[2].trim();
+		                double price = Double.parseDouble(productData[3].trim());
+		                Product product = new Product(id, name, description, price);
+		                pc.addProduct(product); 
+		            } catch (NumberFormatException e) {
+		                System.err.println("Error parsing product entry: " + entry);
+		            }
+		        }
+		    }
+		 
+		 ch.saveToFile(catalogFile);
+	}
+	
+	
 	public static void resourceCheck(String directory, String userFile, String catalogFile) {
 		File dir = new File(directory);
         if (!dir.exists()) {
@@ -91,12 +151,22 @@ public class Runner {
         UserFileWriter ufw = new UserFileWriter();
         UserRepository ur = new UserRepository(userFile, ufp, ufw);
         
+        ProductCatalog pc = new ProductCatalog();
+        CatalogFileParser cfp = new CatalogFileParser();
+        CatalogFileWriter cfw = new CatalogFileWriter();
+        CatalogHandler ch = new CatalogHandler(pc, cfw, cfp);
+        
         Authentication auth = new Authentication(ur);
         resourceCheck(directory, userFile, catalogFile);
 
         Scanner sc = new Scanner(System.in);
         
+        sampleChecker(catalogFile);
         User currentUser = startUp(sc, auth);
+        
+        
+        
+        
         if(currentUser != null) {
         	System.out.print("success");
         }

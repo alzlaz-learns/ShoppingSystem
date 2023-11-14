@@ -12,8 +12,6 @@ public class Cart implements CartInterface{
 
 	@Override
 	public void addProduct(Product product, int quantity) {
-		// TODO Auto-generated method stub
-
 	    if (cartMap.containsKey(product)) {
 	    	cartMap.put(product, cartMap.get(product) + quantity);
 	    } else {
@@ -23,7 +21,6 @@ public class Cart implements CartInterface{
 
 	@Override
 	public void removeProduct(Product product, int quantity) {
-		// TODO Auto-generated method stub
 		if(!cartMap.containsKey(product)) {
 			throw new IllegalArgumentException("Product not found in cart.");
 		}
@@ -42,13 +39,11 @@ public class Cart implements CartInterface{
 
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
 		cartMap.clear(); 
 	}
 
 	@Override
 	public double getTotalCost() {
-		// TODO Auto-generated method stub
 		double totalCost = 0;
 	    for (Map.Entry<Product, Integer> entry : cartMap.entrySet()) {
 	        totalCost += entry.getKey().getPrice() * entry.getValue();
@@ -58,7 +53,6 @@ public class Cart implements CartInterface{
 
 	@Override
 	public Map<Product, Integer> getItems() {
-		// TODO Auto-generated method stub
 		return new HashMap<>(cartMap);
 	}
 }

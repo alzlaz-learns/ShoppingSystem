@@ -1,0 +1,15 @@
+1,Cereal,dummy yummy,4.99
+2,Bread,Fresh when made,3.49
+3,Apples,yum only a coupe of worms,5.99
+4,Cheese,Milk aged for your pleasure,7.99
+5,Coffee,Good ol cuppa joe,8.99
+6,Almond Milk,Use it for your coffee,2.99
+7,Eggs,eggs,3.99
+8,Spaghetti,great with meathballs,1.99
+9,Oil,Food or car works great with both,10.99
+10,Blue,it taste toxic,2.49
+11,Chocolate,mwa chefs kiss,1.99
+12,Jam,strawberry,3.99
+13,Batteries,How shocking,5.49
+14,stake,the wooden kind for vampires,2.99
+15,raw garbage,Maybe its good,4.49

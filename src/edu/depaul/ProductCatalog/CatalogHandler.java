@@ -28,5 +28,4 @@ public class CatalogHandler implements CatalogHandlerInterface{
             catalog.addProduct(product);
         }
 	}
-
 }

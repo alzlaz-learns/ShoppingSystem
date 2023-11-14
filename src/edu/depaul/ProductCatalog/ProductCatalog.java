@@ -33,5 +33,4 @@ public class ProductCatalog implements ProductCatalogInterface{
 		}
 		return catalogList;
 	}
-
 }

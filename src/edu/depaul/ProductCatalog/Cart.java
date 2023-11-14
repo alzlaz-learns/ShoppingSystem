@@ -8,6 +8,7 @@ import edu.depaul.OrderingFactories.ProductInterface;
 public class Cart implements CartInterface{
 	private static Cart instance;
 	private Map<ProductInterface, Integer> cartMap;
+	private String user;
 	
 	private Cart() {
 		cartMap = new HashMap<>();
@@ -64,5 +65,21 @@ public class Cart implements CartInterface{
 	@Override
 	public Map<ProductInterface, Integer> getItems() {
 		return new HashMap<>(cartMap);
+	}
+
+	@Override
+	public void setUser(String user) {
+		this.user = user;
+	}
+
+	@Override
+	public void displayCart() {
+		for (Map.Entry<ProductInterface, Integer> entry : cartMap.entrySet()) {
+	        String line = entry.getKey().getName() + " " + entry.getValue() + "*"+ entry.getKey().getPrice() * entry.getValue();
+	        System.out.println(line);
+		}
+		
+		System.out.print(getTotalCost());
+		
 	}
 }

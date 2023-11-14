@@ -9,6 +9,8 @@ public interface CartInterface {
 	void removeProduct(ProductInterface product, int quantity);
 	void clear();
 	double getTotalCost();
+	void setUser(String user);
 	Map<ProductInterface, Integer> getItems();
+	void displayCart();
 	//maybe consider a break cost down if i have time.
 }

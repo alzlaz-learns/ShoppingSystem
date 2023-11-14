@@ -2,6 +2,8 @@ package edu.depaul.ProductCatalog;
 
 import java.util.List;
 
+import edu.depaul.OrderingFactories.ProductInterface;
+
 public class CatalogHandler implements CatalogHandlerInterface{
 	private ProductCatalog catalog;
 	private CatalogWriteInterface cw;
@@ -15,16 +17,16 @@ public class CatalogHandler implements CatalogHandlerInterface{
 	
 	@Override
 	public void saveToFile(String filePath) {
-		List<Product> catalogList = catalog.getAllProducts();
-		for(Product p : catalogList) {
+		List<ProductInterface> catalogList = catalog.getAllProducts();
+		for(ProductInterface p : catalogList) {
 			cw.saveNewProductToFile(filePath, p);
 		}
 	}
 
 	@Override
 	public void loadFromFile(String filePath) {
-		List<Product> p = cp.parseFile(filePath);
-		for (Product product : p) {
+		List<ProductInterface> p = cp.parseFile(filePath);
+		for (ProductInterface product : p) {
             catalog.addProduct(product);
         }
 	}

@@ -3,15 +3,25 @@ package edu.depaul.ProductCatalog;
 import java.util.HashMap;
 import java.util.Map;
 
+import edu.depaul.OrderingFactories.ProductInterface;
+
 public class Cart implements CartInterface{
-	private Map<Product, Integer> cartMap;
+	private static Cart instance;
+	private Map<ProductInterface, Integer> cartMap;
 	
-	public Cart() {
-		this.cartMap = new HashMap<>();
+	private Cart() {
+		cartMap = new HashMap<>();
+	}
+	
+	public static Cart getInstance(){
+		if(instance == null) {
+			instance = new Cart();
+		}
+		return instance;
 	}
 
 	@Override
-	public void addProduct(Product product, int quantity) {
+	public void addProduct(ProductInterface product, int quantity) {
 	    if (cartMap.containsKey(product)) {
 	    	cartMap.put(product, cartMap.get(product) + quantity);
 	    } else {
@@ -20,7 +30,7 @@ public class Cart implements CartInterface{
 	}
 
 	@Override
-	public void removeProduct(Product product, int quantity) {
+	public void removeProduct(ProductInterface product, int quantity) {
 		if(!cartMap.containsKey(product)) {
 			throw new IllegalArgumentException("Product not found in cart.");
 		}
@@ -45,14 +55,14 @@ public class Cart implements CartInterface{
 	@Override
 	public double getTotalCost() {
 		double totalCost = 0;
-	    for (Map.Entry<Product, Integer> entry : cartMap.entrySet()) {
+	    for (Map.Entry<ProductInterface, Integer> entry : cartMap.entrySet()) {
 	        totalCost += entry.getKey().getPrice() * entry.getValue();
 	    }
 	    return totalCost;
 	}
 
 	@Override
-	public Map<Product, Integer> getItems() {
+	public Map<ProductInterface, Integer> getItems() {
 		return new HashMap<>(cartMap);
 	}
 }

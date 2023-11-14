@@ -2,22 +2,18 @@ package edu.depaul.User;
 
 import java.util.Map;
 
+import edu.depaul.OrderingFactories.ProductInterface;
 import edu.depaul.ProductCatalog.Cart;
-import edu.depaul.ProductCatalog.CartInterface;
-import edu.depaul.ProductCatalog.Product;
 
 // Simple user object.
 public class User {
 	private String username;
 	private String password;
 	
-	//add a cart 
-	private CartInterface cart;
-	
 	public User(String userName, String password) {
 		this.setUserName(userName);
 		this.setPassword(password);
-		this.cart = new Cart();
+		
 	}
 
 	public String getUserName() {
@@ -36,15 +32,15 @@ public class User {
 		return this.password;
 	}
 
-    public void addToCart(Product product, int quantity) {
-        cart.addProduct(product, quantity);
+    public void addToCart(ProductInterface product, int quantity) {
+        Cart.getInstance().addProduct(product, quantity);
     }
 
-    public void removeFromCart(Product product, int quantity) {
-        cart.removeProduct(product, quantity);
+    public void removeFromCart(ProductInterface product, int quantity) {
+    	Cart.getInstance().removeProduct(product, quantity);
     }
 
-    public Map<Product, Integer> viewCartItems() {
-        return cart.getItems();
+    public Map<ProductInterface, Integer> viewCartItems() {
+        return Cart.getInstance().getItems();
     }
 }

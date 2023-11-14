@@ -5,12 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import edu.depaul.OrderingFactories.ProductInterface;
+
 public class ProductCatalog implements ProductCatalogInterface{
 
-	 private Map<Integer, Product> products = new HashMap<>();
+	 private Map<Integer, ProductInterface> products = new HashMap<>();
 	 
 	@Override
-	public void addProduct(Product product) {
+	public void addProduct(ProductInterface product) {
 		products.put(product.getId(), product);
 	}
 
@@ -20,15 +22,15 @@ public class ProductCatalog implements ProductCatalogInterface{
 	}
 
 	@Override
-	public Product getProductById(int productId) {
+	public ProductInterface getProductById(int productId) {
 		return products.get(productId);
 	}
 
 	@Override
-	public List<Product> getAllProducts() {
-		List<Product> catalogList = new ArrayList<>();
-		for (Map.Entry<Integer, Product> entry: products.entrySet() ) {
-			Product product = entry.getValue();
+	public List<ProductInterface> getAllProducts() {
+		List<ProductInterface> catalogList = new ArrayList<>();
+		for (Map.Entry<Integer, ProductInterface> entry: products.entrySet() ) {
+			ProductInterface product = entry.getValue();
 			catalogList.add(product);
 		}
 		return catalogList;

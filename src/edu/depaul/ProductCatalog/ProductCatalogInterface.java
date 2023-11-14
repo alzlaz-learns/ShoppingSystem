@@ -2,10 +2,12 @@ package edu.depaul.ProductCatalog;
 
 import java.util.List;
 
+import edu.depaul.OrderingFactories.ProductInterface;
+
 public interface ProductCatalogInterface {
-    void addProduct(Product product);
+    void addProduct(ProductInterface product);
     void removeProductByID(int productId);
-    Product getProductById(int productId);
-    List<Product> getAllProducts();
+    ProductInterface getProductById(int productId);
+    List<ProductInterface> getAllProducts();
     //same deal add  more stuff if there is time.
 }

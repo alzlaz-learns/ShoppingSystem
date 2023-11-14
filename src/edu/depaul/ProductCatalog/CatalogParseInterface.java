@@ -2,6 +2,8 @@ package edu.depaul.ProductCatalog;
 
 import java.util.List;
 
+import edu.depaul.OrderingFactories.ProductInterface;
+
 public interface CatalogParseInterface {
-	List<Product> parseFile(String filePath);
+	List<ProductInterface> parseFile(String filePath);
 }

@@ -15,7 +15,32 @@ public class Other implements ProductInterface{
 
 	@Override
 	public void display() {
-		// TODO Auto-generated method stub
-		
+		System.out.println("Item ID: " + getId() + ", Item Name: " + getName() + ", Item Description: " + getDescription() + ", Item Price: " + getPrice());
 	}
+
+	@Override
+	public int getId() {
+		return id;
+	}
+
+	@Override
+	public String getName() {
+		return name;
+	}
+
+	@Override
+	public String getDescription() {
+		return description;
+	}
+
+	@Override
+	public double getPrice() {
+		return price;
+	}
+	
+	@Override
+	public String toString() {
+		return getId() + "," + getName() + "," + getDescription() + "," + getPrice();
+	}
+
 }

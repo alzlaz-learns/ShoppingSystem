@@ -1,4 +1,4 @@
-package edu.depaul;
+package edu.depaul.User;
 
 import java.util.List;
 
@@ -9,15 +9,14 @@ public class UserRepository implements UserInterface{
 	private String filePath;
 	
 	public UserRepository(String filePath, FileParseInterface fileParser, FileWriteInterface fileWriter) {
-		 this.filePath = filePath;
-	        this.fileParser = fileParser;
-	        this.fileWriter = fileWriter;
+		this.filePath = filePath;
+		this.fileParser = fileParser;
+		this.fileWriter = fileWriter;
 	}
 	
 	//call file writer interface
 	@Override
 	public void save(User user) {
-		// TODO Auto-generated method stub
 		fileWriter.saveNewUserToFile(filePath, user);
 	}
 
@@ -33,4 +32,15 @@ public class UserRepository implements UserInterface{
         }
         return null;
 	}
+	
+	@Override
+	public boolean isUNameAvailable(String username) {
+		List<User> users = fileParser.parseFile(filePath);
+        for (User user : users) {
+            if (user.getUserName().equals(username)) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

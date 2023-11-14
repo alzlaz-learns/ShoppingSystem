@@ -1,25 +1,24 @@
-package edu.depaul;
+package edu.depaul.ProductCatalog;
 
 public class Product {
-	private String id;
+	private int id;
 	private String name;
 	private String description;
 	private double price;
 	
 
-
-	public void Procuct(String id, String name, String description, double price) {
+	public Product(int id, String name, String description, double price) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.price = price;
 	}
 	
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -45,5 +44,10 @@ public class Product {
 
 	public void setPrice(double price) {
 		this.price = price;
+	}
+	
+	@Override
+	public String toString() {
+		return Integer.toString(getId()) + "," + getName() +  "," +  getDescription() + "," + getPrice();
 	}
 }

@@ -1,14 +1,12 @@
-package edu.depaul;
+package edu.depaul.User;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileHandler implements FileParseInterface, FileWriteInterface{
+public class UserFileParser implements FileParseInterface{
 
 	/*
 	 * read through file which is going to be in the format of username,password
@@ -31,16 +29,5 @@ public class FileHandler implements FileParseInterface, FileWriteInterface{
 	        e.printStackTrace(); 
 	    }
 	    return users;
-	}
-
-	// Write a new user to file in user,password format. 
-	@Override
-	public void saveNewUserToFile(String filePath, User user) {
-		 String userInfo = user.getUserName() + "," + user.getPassword() + System.lineSeparator();
-		 try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath, true)))  {
-			bw.write(userInfo);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 }

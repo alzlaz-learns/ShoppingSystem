@@ -4,12 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import edu.depaul.OrderingFactories.ProductInterface;
+import edu.depaul.User.User;
 
 public class Cart implements CartInterface{
 	private static Cart instance;
 	private Map<ProductInterface, Integer> cartMap;
 	private String user;
-	
+//	singleton
 	private Cart() {
 		cartMap = new HashMap<>();
 	}

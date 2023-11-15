@@ -1,8 +1,10 @@
 package edu.depaul.ProductCatalog;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.Map;
 
-
+import edu.depaul.Logging.ShopLogger;
 import edu.depaul.OrderingFactories.ProductInterface;
 import edu.depaul.Payment.MockPaymentGateway;
 import edu.depaul.Payment.PaymentResult;
@@ -12,8 +14,11 @@ import edu.depaul.User.User;
 public class CartBuilder {
 	private Cart cart;
 	
+	private Logger logger = ShopLogger.getLogger();
+	
 	public CartBuilder() {
 		this.cart = Cart.getInstance();
+		logger.log(Level.INFO,"carrt initialized");
 	}
 	
 	
@@ -29,6 +34,7 @@ public class CartBuilder {
 	
 	public CartBuilder setUser(User user) {
 	    cart.setUser(user.getUserName());
+	    logger.log(Level.INFO,"carrt set to user: " + user.getUserName());
 	    return this;
 	}
 	
@@ -57,19 +63,20 @@ public class CartBuilder {
 	    * Payment Processing:
 		Simulate a payment processing system (e.g., using a mock payment gateway).
 		Keep this module separate from the core shopping functionality.
-
 	    * 
 	    */
+
 		PaymentService paymentService = new PaymentService(new MockPaymentGateway());
         PaymentResult paymentResult = paymentService.processPayment(user.getPaymentDetails());
 
         //technically always an success 
         if (paymentResult.isSuccess()) {
             Order order = new Order(cart, user);
+            logger.log(Level.INFO, "Payment id: " + order.getOrderId());
             Cart.getInstance().clear();
             return order;
         } else{
-        	System.out.println("submitting order failed");
+        	logger.log(Level.INFO, "user payment failed: " + user.getUserName());
         	return null;
         }
 	}

@@ -4,8 +4,10 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-
+import edu.depaul.Logging.ShopLogger;
 import edu.depaul.OrderingFactories.AbstractProductFactory;
 import edu.depaul.OrderingFactories.Food;
 import edu.depaul.OrderingFactories.FoodFactory;
@@ -39,6 +41,7 @@ public class Runner {
 	}
 	
 	private static void sampleGenerator(String catalogFile) {
+		Logger logger = ShopLogger.getLogger();
 		AbstractProductFactory foodFactory = new FoodFactory();
 		AbstractProductFactory otherFactory = new OtherFactory();
 		ProductCatalog pc = new ProductCatalog();
@@ -77,12 +80,15 @@ public class Runner {
 	                Food f = (Food) foodFactory.createProduct(id, name, description, price);
 	                f.setExp(exp);
 	                pc.addProduct(f);
+	                logger.log(Level.INFO, "Added Food item: " + entry);
 	            } else if (productData.length == 4) {
 	                ProductInterface product = otherFactory.createProduct(id, name, description, price);
 	                pc.addProduct(product);
+	                logger.log(Level.INFO, "Added other item: " + entry);
 	            }
 	        } catch (NumberFormatException e) {
 	            System.err.println("Error parsing product entry: " + entry);
+	            logger.log(Level.INFO, "Error parsing product entry: " + entry);
 	        }
 	    }
 	    ch.saveToFile(catalogFile);
@@ -100,6 +106,7 @@ public class Runner {
             try {
                 usersInfoFile.createNewFile();
             } catch (IOException e) {
+            	
                 System.out.println("An error occurred while creating UsersInfo.txt.");
                 e.printStackTrace();
             }
@@ -161,6 +168,8 @@ public class Runner {
 	
 	//passing reference of CatalogHandler
 	public static void loop(Scanner sc, CatalogHandler ch, ProductCatalog pc, CartBuilder cb, User u) {
+		Logger logger = ShopLogger.getLogger();
+		
 		String input;
 		while(true) {
             System.out.println("Enter command (type 'quit' to exit):");
@@ -195,8 +204,16 @@ public class Runner {
             		pd.setCvv(ccv);
             		pd.setEXPDate(exp);
             		u.setPaymentDetails(pd);
+            		
+            		
             	}
             	Order o = cb.finalize(u);
+            	if (o != null) {
+                    logger.log(Level.INFO, "Order successful: " + u.getUserName());
+                    System.out.println(o.reciept());
+                } else {
+                    logger.log(Level.INFO, "Order failed: " + u.getUserName());
+                }
             	System.out.println(o.reciept());
             	
             }
@@ -217,16 +234,20 @@ public class Runner {
                     ProductInterface productToAdd = pc.getProductById(productId);
                     if (productToAdd == null) {
                         System.out.println("Product not found.");
+                        logger.log(Level.INFO, "unable to fine productID: " + productId);
                         break;
                     }
                     if (quantity <= 0) {
                         System.out.println("Quantity must be greater than zero.");
+                        logger.log(Level.INFO, "invalid amount: " + quantity);
                         break;
                     }
                     cb.addProduct(productToAdd, quantity);
+                    logger.log(Level.INFO, "Successfully add : " + quantity + "-" + productToAdd.getName());
                     System.out.println("Added " + quantity + " of " + productToAdd.getName() + " to the cart.");
                 } catch (NumberFormatException e) {
                     System.out.println("Invalid product ID or quantity. Please enter numeric values.");
+                    logger.log(Level.INFO, "invalid input for productId or quantity" );
                 }
             } else {
             	System.out.print("IInvalid option ");
@@ -235,7 +256,8 @@ public class Runner {
 	}
 	
 	public static void main(String[] args) {
-		
+		Logger logger = ShopLogger.getLogger();
+		logger.log(Level.INFO, "Application starting");
 		String directory = "Resources";
 		String catalogFile = directory + "/CatalogInfo.txt";
         String userFile = directory + "/UsersInfo.txt";
@@ -251,6 +273,7 @@ public class Runner {
         CatalogHandler ch = new CatalogHandler(pc, cfw, cfp);
         
         Authentication auth = new Authentication(ur);
+        
         resourceCheck(directory, userFile, catalogFile);
 
         Scanner sc = new Scanner(System.in);

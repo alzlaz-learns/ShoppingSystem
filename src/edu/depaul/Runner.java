@@ -5,14 +5,18 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
+
 import edu.depaul.OrderingFactories.AbstractProductFactory;
 import edu.depaul.OrderingFactories.Food;
 import edu.depaul.OrderingFactories.FoodFactory;
 import edu.depaul.OrderingFactories.OtherFactory;
 import edu.depaul.OrderingFactories.ProductInterface;
+import edu.depaul.Payment.PaymentDetails;
+import edu.depaul.ProductCatalog.CartBuilder;
 import edu.depaul.ProductCatalog.CatalogFileParser;
 import edu.depaul.ProductCatalog.CatalogFileWriter;
 import edu.depaul.ProductCatalog.CatalogHandler;
+import edu.depaul.ProductCatalog.Order;
 import edu.depaul.ProductCatalog.ProductCatalog;
 import edu.depaul.User.Authentication;
 import edu.depaul.User.User;
@@ -30,7 +34,7 @@ public class Runner {
 			}
         } catch (IOException e) {
             e.printStackTrace();
-            return; // An IOException occurred, handle accordingly.
+            return;
         }
 	}
 	
@@ -114,9 +118,9 @@ public class Runner {
 	public static User startUp(Scanner sc, Authentication auth) {
 		String input;
         while(true) {
-            System.out.println("Enter command (type 'quit' to exit):");
-            System.out.println("Enter command (type 'login' to exit):");
-            System.out.println("Enter commands (type 'register' to exit):");
+            System.out.println("Enter command (type 'quit'):");
+            System.out.println("Enter command (type 'login'):");
+            System.out.println("Enter commands (type 'register'):");
         	input = sc.nextLine();
             if ("quit".equals(input)) {
                 break;
@@ -142,7 +146,10 @@ public class Runner {
             	System.out.print("Please enter password: ");
             	String password = sc.nextLine();
             	System.out.println("password: " + password);
-            	auth.register(username, password);
+            	User u = auth.register(username, password);
+            	if(u != null) {
+            		return u;
+            	}
             }
            
             else {
@@ -150,6 +157,81 @@ public class Runner {
             }
         }
 		return null;
+	}
+	
+	//passing reference of CatalogHandler
+	public static void loop(Scanner sc, CatalogHandler ch, ProductCatalog pc, CartBuilder cb, User u) {
+		String input;
+		while(true) {
+            System.out.println("Enter command (type 'quit' to exit):");
+            System.out.println("Enter command (type 'shop' to see whats in the shop):");
+            System.out.println("Enter commands (type 'add' to add to cart):");
+            System.out.println("Enter commands (type 'cart' to view cart contents):");
+            System.out.println("Enter commands (type 'order' to finalize order):");
+            input = sc.nextLine();
+            if ("quit".equals(input.trim())) {
+                System.out.println("Goodbye");
+            	break;
+            }
+            
+            if ("shop".equals(input.trim())) {
+            	for(ProductInterface p : pc.getAllProducts()) { //test code
+            		p.display();
+            	}
+            }
+            else if("order".equals(input.trim())){
+            	PaymentDetails pd;
+            	if(u.getPaymentDetails() == null) {
+            		pd = new PaymentDetails();
+            		System.out.println("We dont currently have your Card information please fill out to finalize order.");
+            		System.out.print("Please enter credit card or debit card number: ");
+            		String cardNumber = sc.nextLine();
+            		System.out.print("Please enter ccv number: ");
+            		String ccv = sc.nextLine();
+            		System.out.print("Please enter expiration date: ");
+            		String exp = sc.nextLine();
+            		
+            		pd.setCardNumber(cardNumber);
+            		pd.setCvv(ccv);
+            		pd.setEXPDate(exp);
+            		u.setPaymentDetails(pd);
+            	}
+            	Order o = cb.finalize(u);
+            	System.out.println(o.reciept());
+            	
+            }
+            
+            else if("cart".equals(input.trim())) {
+            	cb.displayCartContents();
+            }
+            
+            else if("add".equals(input.trim())) {
+            	System.out.print("Enter the product ID to add to cart: ");
+                String productIdInput = sc.nextLine().trim();
+                System.out.print("Enter the quantity: ");
+                String quantityInput = sc.nextLine().trim();
+
+                try {
+                    int productId = Integer.parseInt(productIdInput);
+                    int quantity = Integer.parseInt(quantityInput);
+                    ProductInterface productToAdd = pc.getProductById(productId);
+                    if (productToAdd == null) {
+                        System.out.println("Product not found.");
+                        break;
+                    }
+                    if (quantity <= 0) {
+                        System.out.println("Quantity must be greater than zero.");
+                        break;
+                    }
+                    cb.addProduct(productToAdd, quantity);
+                    System.out.println("Added " + quantity + " of " + productToAdd.getName() + " to the cart.");
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid product ID or quantity. Please enter numeric values.");
+                }
+            } else {
+            	System.out.print("IInvalid option ");
+            }
+		}
 	}
 	
 	public static void main(String[] args) {
@@ -176,8 +258,12 @@ public class Runner {
         sampleChecker(catalogFile);
         User currentUser = startUp(sc, auth);
         
+        ch.loadFromFile(catalogFile);
         if(currentUser != null) {
         	System.out.print("success");
+        	CartBuilder cb = new CartBuilder();
+        	loop(sc, ch, pc, cb, currentUser);
+        	
         }
         else {
         	System.out.print("fail");

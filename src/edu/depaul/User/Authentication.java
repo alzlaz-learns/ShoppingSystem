@@ -8,16 +8,19 @@ public class Authentication {
 		this.userRepository = userRepository;
 	}
 	
-	public void register(String username, String password) {
+	public User register(String username, String password) {
 		
 		//checks if the username is available if so creates a user then writes it to file. else lets user know to try a different name.
 		if(userRepository.isUNameAvailable(username)) {
 			User user = new User(username, password); 
 	        userRepository.save(user); 
 	        System.out.println("User registered successfully.");
+	        return user;
 		}else {
 			System.out.println("Username unavailable.");
+			return null;
 		}
+		
 	}
 	
 	public User login(String username, String password) {

@@ -3,9 +3,12 @@ package edu.depaul.ProductCatalog;
 import java.util.HashMap;
 import java.util.Map;
 
-import edu.depaul.OrderingFactories.ProductInterface;
+import edu.depaul.ItemFactories.ProductInterface;
 import edu.depaul.User.User;
 
+
+//singleton that implements CartInterface
+//hold a carts contents and opetartions on those contents.
 public class Cart implements CartInterface{
 	private static Cart instance;
 	private Map<ProductInterface, Integer> cartMap;

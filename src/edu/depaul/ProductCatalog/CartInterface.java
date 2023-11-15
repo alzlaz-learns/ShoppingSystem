@@ -2,7 +2,7 @@ package edu.depaul.ProductCatalog;
 
 import java.util.Map;
 
-import edu.depaul.OrderingFactories.ProductInterface;
+import edu.depaul.ItemFactories.ProductInterface;
 
 public interface CartInterface {
 	void addProduct(ProductInterface product, int quantity);

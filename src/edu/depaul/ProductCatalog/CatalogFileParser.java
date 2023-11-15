@@ -6,10 +6,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.depaul.OrderingFactories.AbstractProductFactory;
-import edu.depaul.OrderingFactories.Food;
-import edu.depaul.OrderingFactories.ProductInterface;
+import edu.depaul.ItemFactories.AbstractProductFactory;
+import edu.depaul.ItemFactories.Food;
+import edu.depaul.ItemFactories.ProductInterface;
 
+//implements CatalogParseInterface to and AbstractProductFactoy to determine type of Item.
 public class CatalogFileParser implements CatalogParseInterface {
 
 	private AbstractProductFactory foodFactory;
@@ -19,10 +20,12 @@ public class CatalogFileParser implements CatalogParseInterface {
 		this.otherFactory = otherFactory;
 	}
 	
-	
+	//reads file then splits line if length of 4 it would be an Other item if 5 that means it include expiration 
+	//date then it would be a food item. Uses Factory pattern to create an object of that type and then adds it to a list of ProductInterfaces.
+	//when completed returns them.
 	@Override
-	public List<ProductInterface> parseFile(String filePath) {
-		 List<ProductInterface> products = new ArrayList<>();
+	public List<ProductInterface> parseFile(String filePath)  {
+		List<ProductInterface> products = new ArrayList<>();
 		try(BufferedReader br = new BufferedReader(new FileReader(filePath))){
 			String line;
 			while((line = br.readLine()) != null){
@@ -38,13 +41,19 @@ public class CatalogFileParser implements CatalogParseInterface {
 				if(productInfo.length == 5) {
 					String exp = productInfo[4].trim();
 					Food f = (Food) foodFactory.createProduct(id, name, description, price);
-					f.setExp(exp);
-					products.add(f);
+					if (exp.matches("(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])")) {
+				        f.setExp(exp);
+				        products.add(f);
+				    } else {
+				        throw new Exception("Invalid date");
+				    }
 				}
 			}
 		}catch (IOException e) {
 			e.printStackTrace();
 		}catch (NumberFormatException e) {
+			e.printStackTrace();
+		}catch (Exception e) {
 			e.printStackTrace();
 		}
 		return products;

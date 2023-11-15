@@ -1,7 +1,7 @@
 package edu.depaul.User;
 
 
-//basic stuff think about the further options later.
+//Contract for classes that implements this.
 public interface UserInterface {
 	void save(User user);
 	User findUserByName(String username);

@@ -1,7 +1,6 @@
-package edu.depaul.OrderingFactories;
+package edu.depaul.ItemFactories;
 
 public class OtherFactory implements AbstractProductFactory{
-
 	@Override
 	public ProductInterface createProduct(int id, String name, String description, double price) {
 		// TODO Auto-generated method stub

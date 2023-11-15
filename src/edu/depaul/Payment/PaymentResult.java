@@ -1,6 +1,7 @@
 package edu.depaul.Payment;
 
-//#3
+//#3 
+//returns the results of a payment.
 public class PaymentResult {
 	private boolean success;
    

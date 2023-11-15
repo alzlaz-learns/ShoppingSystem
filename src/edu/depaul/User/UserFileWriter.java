@@ -4,6 +4,8 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
+//class that implements FIleWriter interface
+//used to write user information to file.
 public class UserFileWriter implements FileWriteInterface{
 
 	// Write a new user to file in user,password format. 

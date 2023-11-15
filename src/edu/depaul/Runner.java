@@ -7,12 +7,12 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import edu.depaul.ItemFactories.AbstractProductFactory;
+import edu.depaul.ItemFactories.Food;
+import edu.depaul.ItemFactories.FoodFactory;
+import edu.depaul.ItemFactories.OtherFactory;
+import edu.depaul.ItemFactories.ProductInterface;
 import edu.depaul.Logging.ShopLogger;
-import edu.depaul.OrderingFactories.AbstractProductFactory;
-import edu.depaul.OrderingFactories.Food;
-import edu.depaul.OrderingFactories.FoodFactory;
-import edu.depaul.OrderingFactories.OtherFactory;
-import edu.depaul.OrderingFactories.ProductInterface;
 import edu.depaul.Payment.PaymentDetails;
 import edu.depaul.ProductCatalog.CartBuilder;
 import edu.depaul.ProductCatalog.CatalogFileParser;
@@ -179,7 +179,6 @@ public class Runner {
             System.out.println("Enter commands (type 'order' to finalize order):");
             input = sc.nextLine();
             if ("quit".equals(input.trim())) {
-                System.out.println("Goodbye");
             	break;
             }
             
@@ -283,14 +282,12 @@ public class Runner {
         
         ch.loadFromFile(catalogFile);
         if(currentUser != null) {
-        	System.out.print("success");
-        	CartBuilder cb = new CartBuilder();
+        	CartBuilder cb = new CartBuilder(currentUser);
         	loop(sc, ch, pc, cb, currentUser);
-        	
         }
-        else {
-        	System.out.print("fail");
-        }
+        
+        System.out.println("Goodbye");
+        
     }
 }
  

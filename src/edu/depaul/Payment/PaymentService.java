@@ -1,5 +1,6 @@
 package edu.depaul.Payment;
 
+//responsible for processing "payment"
 public class PaymentService {
 	 private PaymentGateway paymentGateway;
 

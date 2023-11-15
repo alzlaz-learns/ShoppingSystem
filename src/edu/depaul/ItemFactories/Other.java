@@ -1,5 +1,8 @@
-package edu.depaul.OrderingFactories;
+package edu.depaul.ItemFactories;
 
+
+//concrete implementation of ProductInterace
+//generic product items non perishables
 public class Other implements ProductInterface{
 	private int id;
 	private String name;

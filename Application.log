@@ -1,0 +1,14 @@
+Nov 15, 2023 2:54:49 PM edu.depaul.Runner main
+INFO: Application starting
+Nov 15, 2023 2:55:01 PM edu.depaul.ProductCatalog.CartBuilder <init>
+INFO: carrt initialized
+Nov 15, 2023 2:56:22 PM edu.depaul.Runner loop
+INFO: Successfully add : 4-Oil
+Nov 15, 2023 2:56:49 PM edu.depaul.ProductCatalog.CartBuilder finalize
+INFO: Payment id: 1700081809579
+Nov 15, 2023 2:56:49 PM edu.depaul.Runner loop
+INFO: Order successful: test
+Nov 15, 2023 4:05:05 PM edu.depaul.Runner main
+INFO: Application starting
+Nov 15, 2023 5:11:35 PM edu.depaul.Runner main
+INFO: Application starting

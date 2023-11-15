@@ -2,9 +2,9 @@ package edu.depaul.User;
 
 import edu.depaul.Payment.PaymentDetails;
 
-// Simple user object.
+// User object that represents a basic User
 public class User {
-	private String username;
+	private String username; 
 	private String password;
 	private PaymentDetails paymentDetails;
 	

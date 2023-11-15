@@ -2,8 +2,11 @@ package edu.depaul.ProductCatalog;
 
 import java.util.List;
 
-import edu.depaul.OrderingFactories.ProductInterface;
+import edu.depaul.ItemFactories.ProductInterface;
 
+
+//class that implements the CatalogHandlerInterface
+//meant to handle the reading and writing of Catalog files. using the CatalogWriteInterface CatalogParseInterface
 public class CatalogHandler implements CatalogHandlerInterface{
 	private ProductCatalog catalog;
 	private CatalogWriteInterface cw;
@@ -15,6 +18,7 @@ public class CatalogHandler implements CatalogHandlerInterface{
 		 this.cp = cp;
 	}
 	
+	//Calls CatalogWriteInterface to write all the items in ProductCatalog to a filepath in this case CatalogInfo.txt
 	@Override
 	public void saveToFile(String filePath) {
 		List<ProductInterface> catalogList = catalog.getAllProducts();
@@ -23,6 +27,7 @@ public class CatalogHandler implements CatalogHandlerInterface{
 		}
 	}
 
+	//Calls CatalogWriteInterface to load from a filepath in this case CatalogInfo.txt to the ProductCatalog
 	@Override
 	public void loadFromFile(String filePath) {
 		List<ProductInterface> p = cp.parseFile(filePath);

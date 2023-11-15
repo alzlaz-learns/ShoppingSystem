@@ -5,7 +5,7 @@ import java.util.logging.Level;
 import java.io.IOException;
 import java.util.logging.FileHandler;
 import java.util.logging.SimpleFormatter;
-
+//simple logging class that writes to Application.log
 public class ShopLogger {
 	 private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 	 private static FileHandler fileHandler;
@@ -20,6 +20,7 @@ public class ShopLogger {
 					logger.addHandler(fileHandler);
 		            SimpleFormatter formatter = new SimpleFormatter();
 		            fileHandler.setFormatter(formatter);
+		            logger.setUseParentHandlers(false);
 		            
 				} catch (SecurityException e) {
 					// TODO Auto-generated catch block

@@ -1,4 +1,4 @@
-package edu.depaul.OrderingFactories;
+package edu.depaul.ItemFactories;
 
 public class FoodFactory implements AbstractProductFactory{
 

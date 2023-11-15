@@ -1,5 +1,6 @@
-package edu.depaul.OrderingFactories;
+package edu.depaul.ItemFactories;
 
+//contract for classes
 public interface ProductInterface {
 	//here
 	void display();

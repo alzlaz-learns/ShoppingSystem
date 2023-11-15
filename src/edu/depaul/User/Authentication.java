@@ -1,5 +1,7 @@
 package edu.depaul.User;
 
+
+//responsible for registering and login
 public class Authentication {
 
 	private UserInterface userRepository;
@@ -23,6 +25,7 @@ public class Authentication {
 		
 	}
 	
+	//loads a User object. then checks if either user is not null and if password for that user matches.
 	public User login(String username, String password) {
 		User user = userRepository.findUserByName(username);
 		if(user != null && user.getPassword().equals(password)) {

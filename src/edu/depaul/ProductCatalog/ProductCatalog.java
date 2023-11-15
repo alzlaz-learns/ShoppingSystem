@@ -5,12 +5,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import edu.depaul.OrderingFactories.ProductInterface;
+import edu.depaul.ItemFactories.ProductInterface;
 
+//class that implements ProductCatalogInterface
+//meant to be the representation of the items in shop.
+//other than using it to do initial population it isnt much used.
 public class ProductCatalog implements ProductCatalogInterface{
 
-	 private Map<Integer, ProductInterface> products = new HashMap<>();
-	 
+	private Map<Integer, ProductInterface> products = new HashMap<>();
+	
 	@Override
 	public void addProduct(ProductInterface product) {
 		products.put(product.getId(), product);

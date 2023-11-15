@@ -1,5 +1,6 @@
 package edu.depaul.Payment;
 
+//Object representing PaymentDatails gets cc string representation exp string representation and cvv string representation
 public class PaymentDetails {
     private String cardNumber;
     private String exp;

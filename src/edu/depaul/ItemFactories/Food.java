@@ -1,5 +1,7 @@
-package edu.depaul.OrderingFactories;
+package edu.depaul.ItemFactories;
 
+//concrete implementation of ProductInterace
+//food items perishables.
 public class Food implements ProductInterface
 {
 	private int id;
@@ -21,6 +23,7 @@ public class Food implements ProductInterface
 	}
 
 	public void setExp(String exp) {
+		
 		this.exp = exp;
 	}
 	

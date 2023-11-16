@@ -34,3 +34,17 @@ Nov 16, 2023 2:10:39 PM edu.depaul.ProductCatalog.CartBuilder setUser
 INFO: carrt set to user: pass
 Nov 16, 2023 2:10:39 PM edu.depaul.ProductCatalog.CartBuilder <init>
 INFO: carrt initialized
+Nov 16, 2023 2:10:54 PM edu.depaul.Runner main
+INFO: Application starting
+Nov 16, 2023 2:11:05 PM edu.depaul.ProductCatalog.CartBuilder setUser
+INFO: carrt set to user: pass
+Nov 16, 2023 2:11:05 PM edu.depaul.ProductCatalog.CartBuilder <init>
+INFO: carrt initialized
+Nov 16, 2023 2:13:20 PM edu.depaul.Runner loop
+INFO: Successfully add : 2-Cereal
+Nov 16, 2023 2:13:56 PM edu.depaul.Runner loop
+INFO: Successfully add : 1-raw garbage
+Nov 16, 2023 2:14:34 PM edu.depaul.ProductCatalog.CartBuilder finalize
+INFO: Payment id: 1700165674052 user: pass
+Nov 16, 2023 2:14:34 PM edu.depaul.Runner loop
+INFO: Order successful: pass

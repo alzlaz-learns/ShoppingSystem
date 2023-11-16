@@ -1,0 +1,42 @@
+Nov 16, 2023 4:01:47 PM edu.depaul.Runner main
+INFO: Application starting
+Nov 16, 2023 4:01:47 PM edu.depaul.Runner sampleGenerator
+INFO: Added Food item: 1,Cereal, dummy yummy,4.99,11/22
+Nov 16, 2023 4:01:47 PM edu.depaul.Runner sampleGenerator
+INFO: Added Food item: 2,Bread,Fresh when made,3.49,11/22
+Nov 16, 2023 4:01:47 PM edu.depaul.Runner sampleGenerator
+INFO: Added Food item: 3,Apples,yum only a coupe of worms,5.99,11/22
+Nov 16, 2023 4:01:47 PM edu.depaul.Runner sampleGenerator
+INFO: Added Food item: 4,Cheese,Milk aged for your pleasure,7.99,11/22
+Nov 16, 2023 4:01:47 PM edu.depaul.Runner sampleGenerator
+INFO: Added Food item: 5,Coffee,Good ol cuppa joe,8.99,11/22
+Nov 16, 2023 4:01:47 PM edu.depaul.Runner sampleGenerator
+INFO: Added Food item: 6,Almond Milk,Use it for your coffee,2.99,11/22
+Nov 16, 2023 4:01:47 PM edu.depaul.Runner sampleGenerator
+INFO: Added Food item: 7,Eggs,eggs,3.99,11/22
+Nov 16, 2023 4:01:47 PM edu.depaul.Runner sampleGenerator
+INFO: Added Food item: 8,Spaghetti,great with meathballs,1.99,11/22
+Nov 16, 2023 4:01:47 PM edu.depaul.Runner sampleGenerator
+INFO: Added other item: 9,Oil,Food or car works great with both,10.99
+Nov 16, 2023 4:01:47 PM edu.depaul.Runner sampleGenerator
+INFO: Added other item: 10,Blue,it taste toxic,2.49
+Nov 16, 2023 4:01:47 PM edu.depaul.Runner sampleGenerator
+INFO: Added Food item: 11,Chocolate,mwa chefs kiss,1.99,11/22
+Nov 16, 2023 4:01:47 PM edu.depaul.Runner sampleGenerator
+INFO: Added Food item: 12,Jam,strawberry,3.99,11/22
+Nov 16, 2023 4:01:47 PM edu.depaul.Runner sampleGenerator
+INFO: Added other item: 13,Batteries,How shocking,5.49
+Nov 16, 2023 4:01:47 PM edu.depaul.Runner sampleGenerator
+INFO: Added other item: 14,stake,the wooden kind for vampires,2.99
+Nov 16, 2023 4:01:47 PM edu.depaul.Runner sampleGenerator
+INFO: Added other item: 15,raw garbage,Maybe its good,4.49
+Nov 16, 2023 4:02:01 PM edu.depaul.ProductCatalog.CartBuilder setUser
+INFO: carrt set to user: tom
+Nov 16, 2023 4:02:01 PM edu.depaul.ProductCatalog.CartBuilder <init>
+INFO: carrt initialized
+Nov 16, 2023 4:02:26 PM edu.depaul.Runner loop
+INFO: Successfully add : 2-Cereal
+Nov 16, 2023 4:02:39 PM edu.depaul.ProductCatalog.CartBuilder finalize
+INFO: Payment id: 1700172159715 user: tom
+Nov 16, 2023 4:02:39 PM edu.depaul.Runner loop
+INFO: Order successful: tom

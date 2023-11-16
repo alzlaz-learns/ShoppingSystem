@@ -15,7 +15,7 @@ import edu.depaul.User.User;
 //Class that uses builder patter to manipulate the cart and finalize the order.
 public class CartBuilder {
 	private Cart cart;
-	private User user;
+//	private User user;
 	private Logger logger = ShopLogger.getLogger();
 	
 	public CartBuilder(User user) {
@@ -62,12 +62,6 @@ public class CartBuilder {
 	//finalizes order by calling mocks of payment gateway 
 	//gateways always return true so alway is successful.
 	public Order finalize(User user) {
-	   /*TODO somehow this
-	    * Payment Processing:
-		Simulate a payment processing system (e.g., using a mock payment gateway).
-		Keep this module separate from the core shopping functionality.
-	    * 
-	    */
 		PaymentService paymentService = new PaymentService(new MockPaymentGateway());
         PaymentResult paymentResult = paymentService.processPayment(user.getPaymentDetails());
 

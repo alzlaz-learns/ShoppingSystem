@@ -12,7 +12,7 @@ public class Order {
 	private double totalCost;
 	private String username;
 	
-	   public Order(Cart cart, User user) {
+	   public Order(CartInterface cart, User user) {
 	        this.orderId = generateOrderId();
 	        this.items = cart.getItems();
 	        this.totalCost = cart.getTotalCost();

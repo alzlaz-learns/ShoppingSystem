@@ -169,7 +169,6 @@ public class Runner {
 	//passing reference of CatalogHandler
 	public static void loop(Scanner sc, CatalogHandler ch, ProductCatalog pc, CartBuilder cb, User u) {
 		Logger logger = ShopLogger.getLogger();
-		
 		String input;
 		while(true) {
             System.out.println("Enter command (type 'quit' to exit):");
@@ -204,7 +203,6 @@ public class Runner {
             		pd.setEXPDate(exp);
             		u.setPaymentDetails(pd);
             		
-            		
             	}
             	Order o = cb.finalize(u);
             	if (o != null) {
@@ -213,14 +211,12 @@ public class Runner {
                 } else {
                     logger.log(Level.INFO, "Order failed: " + u.getUserName());
                 }
-            	System.out.println(o.reciept());
-            	
             }
             
             else if("cart".equals(input.trim())) {
             	cb.displayCartContents();
             }
-            
+          
             else if("add".equals(input.trim())) {
             	System.out.print("Enter the product ID to add to cart: ");
                 String productIdInput = sc.nextLine().trim();
